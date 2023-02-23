@@ -1,0 +1,7 @@
+{
+  "name": "accesswallet",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
