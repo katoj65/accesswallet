@@ -33,7 +33,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-  ],
+, "src/models/connect_supabase.js"  ],
   "exclude": [
     "node_modules"
   ]
