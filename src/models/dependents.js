@@ -15,10 +15,6 @@ return await supabase.from('dependent').select('*').eq('id',id);
 }
 
 
-
-
-
-
 //create dependent
 create(input){
 const supabase=connect();

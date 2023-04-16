@@ -4,17 +4,6 @@
 <div>
 
 
-<form style="background:white;padding:10px;margin-bottom:2px;" @submit.prevent="submit">
-<ion-item  style="border-bottom:solid 2px #528265;">
-<ion-label position="stacked" style="font-size:20px;margin-bottom:20px;color:#528265;font-weight:bold;font-size:22px;">Send Money </ion-label>
-<ion-input ref="input" type="number" placeholder="Enter amount to be sent" v-model="form.amount" style="padding-bottom:10px;"></ion-input>
-</ion-item>
-<div style="padding:0;padding-top:10px;">
-<ion-button expand="block" type="submit">
-<ion-icon slot="start" :icon="send"></ion-icon>
-Send Money</ion-button>
-</div>
-</form>
 
 
 
@@ -43,12 +32,29 @@ Send Money</ion-button>
 <skeleton-component/>
 </div>
 
+
+
+<form>
+<ion-footer style="position:fixed;bottom:0;width:100%;border-top:solid thin #528265;" class="ion-no-border">
+<ion-toolbar style="padding:10px;padding-top:0;font-weight:bold;padding-left:30px;padding-bottom:0;">Send Money</ion-toolbar>
+<ion-toolbar>
+<ion-buttons slot="end">
+<ion-button>
+<ion-icon :icon="send"></ion-icon>
+</ion-button>
+</ion-buttons>
+<ion-input ref="input" type="number" placeholder="Enter amount to be sent" v-model="form.amount" style="padding-bottom:10px;margin-left:24px;"></ion-input>
+</ion-toolbar>
+</ion-footer>
+  </form>
+
+
 </dialog-layout>
 </template>
 <script>
 import DialogLayout from '@/components/DialogLayout.vue';
 import SkeletonComponent from '@/components/SkeletonComponent.vue';
-import { IonItem, IonLabel,IonInput,IonButton, IonIcon,} from '@ionic/vue';
+import { IonItem, IonLabel,IonInput,IonButton, IonIcon,IonButtons,  IonToolbar, IonFooter} from '@ionic/vue';
 import Dependent from '@/models/dependents';
 import {images,send} from 'ionicons/icons';
 export default {
@@ -60,7 +66,9 @@ IonLabel,
 IonInput,
 IonButton,
 IonIcon,
-
+IonButtons,
+IonToolbar,
+IonFooter
 
 
 },
@@ -83,17 +91,21 @@ amount:null,
 //menu information
 menu:[
 
-{id:1,name:'Deposit to Wallet',icon:'',url:'wallet'},
+{id:1,name:'Wallet Deposit',icon:'',url:'wallet'},
 {id:3,name:'Send Gift',icon:'',url:'gift'},
-{id:4,name:'Shopping Vochour',icon:'',url:'shop'},
+{id:4,name:'Send Shopping Vochour',icon:'',url:'shop'},
 {id:5,name:'Schedule Payment',icon:'',url:'pay'},
+{id:5,name:'Send Budget',icon:'',url:'budget'},
+{id:2,name:'Send Invitation',icon:'',url:'invitation'},
 {id:2,name:'view Transactions',icon:'',url:'transact'},
+
 
 
 ],
 
 
-}},
+}
+},
 
 
 methods:{
@@ -139,7 +151,8 @@ this.payload();
 
 setup(){return{
 images,send
-}}
+}
+}
 
 
 

@@ -4,14 +4,14 @@
 <div v-if="isLoading==false">
 <div v-for="d in response" :key="d">
 <div style="margin-top:-20px;padding-top:20px;">
-<div style="text-align:center;padding-top:20px;background:white;">
+<div style="text-align:center;padding-top:20px;background:white;padding-bottom:20px;">
 <div><img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" style="width:70px;border-radius:100%;height:70px;" /></div>
 <h4 style="text-transform:capitalize;">{{ d.names }} </h4>
 <div>{{ d.telephone }}</div>
 <div>
 <ul>
 <li>
-<div @click="$router.push('/dependent-wallet/'+d.id)">
+<div @click="$router.push('/dependent-wallet/'+d.id)" style="background:#f6f8fc;padding:5px;border-radius:10px;padding-top:10px;padding-bottom:10px;">
 <div>
 <ion-icon :icon="walletOutline" style="font-size:22px;"></ion-icon>
 </div>
@@ -19,7 +19,7 @@
 </div>
 </li>
 <li>
-<div @click="$router.push('/dependent-schedule/'+d.id)">
+<div @click="$router.push('/dependent-schedule/'+d.id)" style="background:#f6f8fc;padding:5px;border-radius:10px;padding-top:10px;padding-bottom:10px;">
 <div>
 <ion-icon :icon="calendarOutline" style="font-size:22px;"></ion-icon>
 </div>
@@ -27,7 +27,7 @@
 </div>
 </li>
 <li>
-<div @click="$router.push('/dependent-send/'+d.id)">
+<div @click="$router.push('/dependent-send/'+d.id)" style="background:#f6f8fc;padding:5px;border-radius:10px;padding-top:10px;padding-bottom:10px;">
 <div>
 <ion-icon :icon="send" style="font-size:22px;"></ion-icon>
 </div>
@@ -38,7 +38,7 @@
 </div>
 </div>
 
-<div style="margin-top:-13px;">
+<div style="margin-top:3px;">
 <ion-item  lines="none" >
 <ion-icon :icon="peopleOutline" slot="start"></ion-icon>
 <ion-label style="text-transform:capitalize;">
@@ -56,28 +56,28 @@
 
 
 
-<ion-item lines="none" detail="true">
+<ion-item lines="none" detail="true" button>
 <ion-icon :icon="cashOutline" slot="start"></ion-icon>
 <ion-label>Shopping Vochour</ion-label>
 </ion-item>
 
-<ion-item lines="none" detail="true">
+<ion-item lines="none" detail="true" button>
 <ion-icon :icon="giftOutline" slot="start"></ion-icon>
 <ion-label>Send Gift</ion-label>
 </ion-item>
 
 
-<ion-item lines="none" detail="true">
+<ion-item lines="none" detail="true" button>
 <ion-icon :icon="mailOutline" slot="start"></ion-icon>
 <ion-label>Buy Items</ion-label>
 </ion-item>
 
-<ion-item lines="none" detail="true">
+<ion-item lines="none" detail="true" button>
 <ion-icon :icon="mailOutline" slot="start"></ion-icon>
 <ion-label>Invitations</ion-label>
 </ion-item>
 
-<ion-item lines="none" detail="true">
+<ion-item lines="none" detail="true" button>
 <ion-icon :icon="mailOutline" slot="start"></ion-icon>
 <ion-label>View Transactions</ion-label>
 </ion-item>
@@ -111,7 +111,6 @@ components:{
 LayoutComponent,
 SkeletonComponent,
 IonIcon,
-
 IonItem,
 IonLabel,
 
@@ -270,7 +269,7 @@ float:left;
 margin:5px;
 background:white;
 list-style: none;
-width:25%;
+width:27%;
 padding:5px;
 }
 </style>

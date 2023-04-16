@@ -115,6 +115,10 @@ font-size:18px;
 margin-bottom: 2px;
 }
 
+ion-footer{
+border-top:#528265;
+box-shadow:none;
+}
 
 
 

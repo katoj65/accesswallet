@@ -7,9 +7,9 @@
 <ion-item button v-for="m in menu" :key="m" lines="full" style="border-bottom:none;" @click="$router.push(m.url)">
 <ion-icon :icon="images" slot="start"></ion-icon>
 <ion-label>
-<h4 style="color:#5D6D7E;font-size:18px;">{{ m.title }} </h4>
+<h4 style="color:#5D6D7E;font-size:18px;text-transform:capitalize;">{{ m.title }} </h4>
 </ion-label>
-<label slot="end" style="margin-right:20px;color:silver;font-size:18px;">
+<label slot="end" style="margin-right:20px;color:silver;font-size:18px;text-transform:capitalize;">
 {{ m.description }}
 </label>
 </ion-item>

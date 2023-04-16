@@ -15,6 +15,13 @@ const supabase=connect();
 return supabase.from('notification').select('*').eq('id',id);
 }
 
+async create(input){
+const supabase=connect();
+await supabase.from('notification').insert(input);
+}
+
+
+
 
 
 
