@@ -2,8 +2,10 @@
 <layout-component :title="title" :back="back">
 <div>
 <ion-toolbar>
-<ion-icon :icon="search" slot="start" style="padding-left:10px;"></ion-icon>
+<span slot="start" @click="$router.push('/search')">
+<ion-icon :icon="search" style="padding-left:10px;"></ion-icon>
 <span style="margin-left:10px;">Search....</span>
+</span>
 </ion-toolbar>
 </div>
 
@@ -21,7 +23,7 @@
 <h4 style="text-transform:capitalize;font-weight:bold;font-size:18px;">
 {{ d.names }}
 </h4>
-<p style="text-transform:capitalize;padding-top:5px;">{{ d.relationship }} . {{ d.telephone }} </p>
+<p style="text-transform:capitalize;padding-top:5px;color:gray;">{{ d.relationship }} <ion-icon :icon="ellipse" style="font-size:7px;"></ion-icon> {{ d.telephone }} </p>
 </ion-label>
 <span slot="end">
 <ion-button @click="select_item(d)">Send</ion-button>
@@ -43,8 +45,17 @@ No Dependent
 
 
 
+
+
+
+
+
+
+
+
+
 <div style="position:fixed;bottom:0;width:100%;z-index:10000;padding:0;">
-<ion-footer style="border-top:solid thin #53986E;border-radius:10px 10px 0px 0px;padding:10px; box-shadow: 0 0 5px 0px silver;background:white;" class="ion-no-border">
+<ion-footer style="border-top:solid thin #53986E;border-radius:0px 0px 0px 0px;padding:10px; box-shadow: 0 0 5px 0px silver;background:white;" class="ion-no-border">
 <ion-toolbar>
 
 
@@ -52,13 +63,13 @@ No Dependent
 
 
 <div>
-  <ion-fab style="margin-top:20px;z-index:position:absolute;right:0;">
-    <ion-fab-button @click="submit()">
-    <ion-icon :icon="sendSharp" style="font-size:15px;"></ion-icon>
-    </ion-fab-button>
-    </ion-fab>
+<ion-fab style="margin-top:20px;z-index:position:absolute;right:0;">
+<ion-fab-button @click="submit()">
+<ion-icon :icon="sendSharp" style="font-size:15px;"></ion-icon>
+</ion-fab-button>
+</ion-fab>
 <ion-item>
-<ion-input ref="input" type="number" placeholder="Enter Amount to be Sent" style="margin-right:70px;padding-left:50px;border-bottom:solid thin #D6DBDF;" v-model="form.amount"></ion-input>
+<ion-input ref="input" type="number" placeholder="Enter amount to be sent" style="margin-right:70px;padding-left:50px;border-bottom:solid thin #D6DBDF;" v-model="form.amount"></ion-input>
 </ion-item>
 
 
@@ -78,10 +89,13 @@ Sending Money to {{ dependent.relationship }}
 
 </ion-chip>
 </div>
+<div v-if="isFilled==true && message!=null">
+  <ion-chip color="danger">Fill in the amount field. </ion-chip>
+  </div>
 </div>
 <div v-else-if="recipient==true">
 <ion-item>
-<ion-input type="number" placeholder="Enter Recipient Number" v-model="form.telephone" style="margin-right:70px;"></ion-input>
+<ion-input type="number" placeholder="Enter recipient number" v-model="form.telephone" style="margin-right:70px;border-bottom:solid thin #D6DBDF;margin-bottom:10px;"></ion-input>
 </ion-item>
 <div v-if="isFilled==true && message!=null">
 <ion-chip color="danger">{{ message }} </ion-chip>
@@ -113,7 +127,7 @@ IonFabButton,
 import { Preferences } from '@capacitor/preferences';
 import Dependent from '../models/dependents.js';
 import SkeletonComponent from '@/components/SkeletonComponent.vue';
-import {send,closeOutline, search, sendSharp, closeSharp, addSharp} from 'ionicons/icons';
+import {send,closeOutline, search, sendSharp, closeSharp, addSharp,ellipse } from 'ionicons/icons';
 import SendMoney from '@/models/send.js';
 import LoaderPopupComponent from '@/components/LoaderPopupComponent.vue';
 
@@ -293,7 +307,8 @@ closeOutline,
 search,
 sendSharp,
 closeSharp,
-addSharp
+addSharp,
+ellipse
 }
 }
 

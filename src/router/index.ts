@@ -18,7 +18,7 @@ import CreateDependentPage from '../views/CreateDependentPage.vue';
 import SendToDependentPage from '../views/SendToDependentPage.vue';
 import DependentWalletPage from '../views/DependentWalletPage.vue';
 import DependentSchedulePage from '../views/DependentSchedulePage.vue';
-
+import SearchPage from '../views/SearchPage.vue';
 
 
 
@@ -126,9 +126,13 @@ component:DependentWalletPage
 },
 
 {
-  path:'/dependent-schedule/:id',
-  component:DependentSchedulePage
-  },
+path:'/dependent-schedule/:id',
+component:DependentSchedulePage
+},
+{
+path:'/search',
+component:SearchPage
+}
 
 ]
 
