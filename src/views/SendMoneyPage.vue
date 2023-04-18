@@ -3,12 +3,13 @@
 <div>
 <ion-toolbar>
 <ion-icon :icon="search" slot="start" style="padding-left:10px;"></ion-icon>
-<ion-buttons slot="end">
-<ion-button @click="new_recipient()"><ion-icon :icon="addSharp"></ion-icon> New</ion-button>
-</ion-buttons>
-<ion-input ref="input" type="search" placeholder="Search...."  ></ion-input>
+<span style="margin-left:10px;">Search....</span>
 </ion-toolbar>
 </div>
+
+
+
+
 
 <div v-if="isLoading==false" style="margin-top:2px;">
 <div v-if="response.length>0">
@@ -42,29 +43,24 @@ No Dependent
 
 
 
-
-
-
-
-
-
 <div style="position:fixed;bottom:0;width:100%;z-index:10000;padding:0;">
 <ion-footer style="border-top:solid thin #53986E;border-radius:10px 10px 0px 0px;padding:10px; box-shadow: 0 0 5px 0px silver;background:white;" class="ion-no-border">
 <ion-toolbar>
-<form>
+
+
+
+
+
+<div>
+  <ion-fab style="margin-top:20px;z-index:position:absolute;right:0;">
+    <ion-fab-button @click="submit()">
+    <ion-icon :icon="sendSharp" style="font-size:15px;"></ion-icon>
+    </ion-fab-button>
+    </ion-fab>
 <ion-item>
-
-<span slot="end">
-<ion-fab style="margin-left:-43px;margin-top:-30px;">
-<ion-fab-button size="small" type="submit">
-<ion-icon :icon="sendSharp" style="font-size:15px;"></ion-icon>
-</ion-fab-button>
-</ion-fab>
-</span>
-
-<ion-input ref="input" type="number" placeholder="Enter Amount to be Sent" style="margin-right:30px;"></ion-input>
+<ion-input ref="input" type="number" placeholder="Enter Amount to be Sent" style="margin-right:70px;padding-left:50px;border-bottom:solid thin #D6DBDF;" v-model="form.amount"></ion-input>
 </ion-item>
-</form>
+
 
 <div style="padding-top:10px;"  v-if="dependent!=null">
 <div>
@@ -81,24 +77,16 @@ Sending Money to {{ dependent.relationship }}
 <ion-icon :icon="closeOutline" color="primary" @click="clear()"></ion-icon>
 
 </ion-chip>
-
-    <!--
-    <ion-item lines="none">
-    <ion-avatar slot="start">
-        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-    </ion-avatar>
-    <ion-label>
-    {{ dependent.names }}
-    <p>{{ dependent.telephone }} </p>
-    </ion-label>
-    <ion-button slot="end" @click="clear()"><ion-icon :icon="closeOutline"></ion-icon></ion-button>
-    </ion-item> -->
 </div>
 </div>
-<div v-else-if="recipient!=null">
+<div v-else-if="recipient==true">
 <ion-item>
-<ion-input type="number" placeholder="Enter Recipient Number"></ion-input>
+<ion-input type="number" placeholder="Enter Recipient Number" v-model="form.telephone" style="margin-right:70px;"></ion-input>
 </ion-item>
+<div v-if="isFilled==true && message!=null">
+<ion-chip color="danger">{{ message }} </ion-chip>
+</div>
+</div>
 </div>
 
 
@@ -109,13 +97,13 @@ Sending Money to {{ dependent.relationship }}
 
 
 
-
+<loader-popup-component :message="'Loading...'" v-if="isFormloading==true"/>
 
 </layout-component>
 </template>
 <script>
 import LayoutComponent from '@/components/LayoutComponent.vue';
-import { IonButton, IonButtons,IonToolbar, IonItem,IonLabel, IonAvatar, IonInput, IonFooter,
+import { IonButton,IonToolbar, IonItem,IonLabel, IonAvatar, IonInput, IonFooter,
 IonChip,
 IonIcon,
 IonFab,
@@ -126,15 +114,25 @@ import { Preferences } from '@capacitor/preferences';
 import Dependent from '../models/dependents.js';
 import SkeletonComponent from '@/components/SkeletonComponent.vue';
 import {send,closeOutline, search, sendSharp, closeSharp, addSharp} from 'ionicons/icons';
+import SendMoney from '@/models/send.js';
+import LoaderPopupComponent from '@/components/LoaderPopupComponent.vue';
+
+
+
+
 export default {
 components:{
 LayoutComponent,
-IonButton, IonButtons, IonToolbar,
+IonButton, IonToolbar,
 IonItem,IonLabel,IonAvatar,IonInput,
 SkeletonComponent,IonFooter,
 IonIcon,
 IonChip,
-IonFab, IonFabButton,
+IonFab,
+IonFabButton,
+LoaderPopupComponent,
+
+
 },
 data(){return{
 title:'Send Money',
@@ -143,15 +141,21 @@ isLoading:false,
 response:[],
 dependent:null,
 searching:null,
-recipient:null,
-
-
+recipient:true,
+inserted:null,
+message:null,
+isFormloading:false,
+isFilled:false,
+isSuccess:false,
 
 //form
 form:{
-amount:null,
-tel:null,
-dependentID:null,
+amount:'',
+telephone:'',
+dependentID:'',
+userID:'',
+balance:'',
+type:'',
 }
 
 
@@ -187,19 +191,87 @@ console.log(error);
 
 select_item(row){
 this.dependent=row;
-this.recipient=null;
+this.recipient=false;
+this.form.telephone=row.telephone;
+this.form.dependentID=row.id;
+this.form.type='wallet';
+
 },
 
 clear(){
 this.dependent=null;
-this.recipient=null;
+this.recipient=true;
+this.form.dependentID='';
+this.form.telephone='';
+this.form.amount='';
 },
 
 new_recipient(){
 this.dependent=null;
 this.recipient=true;
+this.form.type='mobile money';
+
+},
+
+
+
+
+
+//submit
+async submit(){
+this.isFilled=false;
+if(this.form.amount!='' && this.form.telephone!=''){
+this.isFormloading=true;
+await Preferences.get({key:'user_session'}).then(user=>{
+const id=JSON.parse(user.value).id;
+this.form.userID=id;
+const model=new SendMoney;
+//get balance
+model.get_balance(id).then(bal=>{
+if(bal.status==200){
+bal.data.forEach(element=>{
+this.form.balance=element.amount;
+});
+
+//check balance.
+if(this.form.balance>=this.form.amount){
+//prepare balance.
+const balance=this.form.balance-this.form.amount;
+//update.
+model.update_balance({'amount':balance},id).then(response=>{
+if(response.status==200){
+response.data.forEach(el=>{
+this.form.balance=el.amount;
+});
+
+this.message='Success';
+//reset form fields.
+this.form.dependentID='';
+this.form.amount='';
+this.form.telephone='';
+this.isFormloading=false;
+this.clear();
+}else{
+console.log('internet connection error.');
+}
+}).catch(e2=>{console.log(e2)});
+}else{
+this.message='You have low credit on your account.';
+}
+
+}else{
+console.log('internet connection error.');
+}
+}
+).catch(e1=>{console.log(e1)});
+}).catch(err=>{console.log(err)});
+}else{
+this.message='Fill in all fields';
+this.isFilled=true;
+}
 
 }
+
 
 
 
@@ -242,10 +314,9 @@ ion-button{
 --color:gray;
 --box-shadow: none;
 --border-radius: 5px;
---border-color: #D6DBDF;
---border-style: solid;
---border-width: thin;
 
+--padding:15px;
+height: 35px;
 
 }
 ion-button .list{
@@ -256,11 +327,16 @@ ion-button .list{
 }
 
 ion-fab-button {
-    --background: #528265;
-    --background-activated: #528265;
-    --background-hover: #528265;
-    --box-shadow: none;
-    --color: white;
+--background: #528265;
+--background-activated: #528265;
+--background-hover: #528265;
+--box-shadow: none;
+--color: white;
   }
+
+ion-item{
+border:none;
+}
+
 
 </style>

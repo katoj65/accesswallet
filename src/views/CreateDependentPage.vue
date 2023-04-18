@@ -155,7 +155,9 @@ console.log(error);
 </script>
 
 
-<style>
+<style scoped>
+
+
 form div{
 padding:30px;
 padding-bottom:0;

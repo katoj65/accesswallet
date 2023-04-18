@@ -89,7 +89,7 @@ images,
 
 }
 </script>
-<style>
+<style scoped>
 ion-item::part(native) {
 border-bottom: solid thin #EBEDEF;
 }

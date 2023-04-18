@@ -113,13 +113,23 @@ color:white;
 ion-item{
 font-size:18px;
 margin-bottom: 2px;
+--border:none;
 }
 
 ion-footer{
-border-top:#528265;
+border-top:solid thin #528265;
 box-shadow:none;
 }
 
+ion-button::part(native){
+--padding:15px;
+height: 35px;
+}
+
+
+ion-item::part(native) {
+border:none;
+  }
 
 
 </style>
