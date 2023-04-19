@@ -2,14 +2,13 @@
 <layout-component>
 <exchange-rate></exchange-rate>
 
-<div>
-<ion-grid>
+<div style="margin:10px;padding-top:0px;padding-bottom:10px;border-radius:20px">
+<!-- <ion-grid>
 <ion-row>
 <ion-col v-for="m in menu" :key="m.id" size="4">
 <ion-card style="margin:0; border-radius:5px;" button>
 <ion-card-header>
 <ion-card-subtitle style="text-align:center;">
-<!-- <ion-icon :icon="gridSharp" size="big" style="font-size:30px;color:#528265;"></ion-icon> -->
 <ion-avatar style="height:30px;padding:0;margin:0;text-align:center;width:100%;">
   <img alt="Icon" :src="m.icon" style="width:30px;height:30px;"/>
 </ion-avatar>
@@ -22,7 +21,25 @@
 </ion-col>
 </ion-row>
 
-</ion-grid>
+</ion-grid> -->
+
+
+
+
+<ion-item v-for="m in menu" :key="m.id" style="border-radius:10px 10px 10px 10px;margin-bottom:10px;" lines="none" detail="true" button>
+<ion-avatar slot="start">
+  <img alt="Silhouette of a person's head"  :src="m.icon"/>
+</ion-avatar>
+<ion-label>
+  <h4 style="font-size:20px;color:#528265;font-weight: bold;">{{ m.item }}</h4>
+</ion-label>
+</ion-item>
+
+
+
+
+
+
 </div>
 
 
@@ -34,20 +51,26 @@
 <script>
 import LayoutComponent from '@/components/LayoutComponent.vue';
 import ExchangeRate from '@/components/ExchangeRate.vue';
-import {IonGrid, IonRow, IonCol,IonCard, IonCardContent, IonCardSubtitle, IonCardHeader,IonAvatar} from '@ionic/vue';
+import {
+// IonGrid, IonRow, IonCol,IonCard, IonCardContent, IonCardSubtitle, IonCardHeader,
+IonAvatar,
+IonItem, IonLabel
+} from '@ionic/vue';
 // import {gridSharp} from 'ionicons/icons';
 export default {
 components:{
 LayoutComponent,
 ExchangeRate,
-IonGrid,
-IonRow,
-IonCol,
-IonCard,
-IonCardContent,
-IonCardHeader,
-IonCardSubtitle,
+// IonGrid,
+// IonRow,
+// IonCol,
+// IonCard,
+// IonCardContent,
+// IonCardHeader,
+// IonCardSubtitle,
 IonAvatar,
+IonItem,
+IonLabel
 
 },
 data(){return{

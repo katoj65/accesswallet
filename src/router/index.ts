@@ -131,7 +131,7 @@ component:DependentSchedulePage
 },
 {
 path:'/search',
-component:SearchPage
+component:SearchPage,
 }
 
 ]

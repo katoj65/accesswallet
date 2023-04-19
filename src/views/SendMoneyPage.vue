@@ -55,7 +55,7 @@ No Dependent
 
 
 <div style="position:fixed;bottom:0;width:100%;z-index:10000;padding:0;">
-<ion-footer style="border-top:solid thin #53986E;border-radius:0px 0px 0px 0px;padding:10px; box-shadow: 0 0 5px 0px silver;background:white;" class="ion-no-border">
+<ion-footer style="border-top:solid 1px #53986E;border-radius:0px 0px 0px 0px;padding:10px; background:white;" class="ion-no-border">
 <ion-toolbar>
 
 
@@ -84,7 +84,8 @@ Sending Money to {{ dependent.relationship }}
 <ion-avatar>
 <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
 </ion-avatar>
-<ion-label style="text-transform:capitalize;"><span style="font-weight:bold;">{{ dependent.names }}</span> . {{ dependent.telephone }}</ion-label>
+<ion-label style="text-transform:capitalize;">
+  <span style="font-weight:bold;">{{ dependent.names }}</span> . {{ dependent.telephone }}</ion-label>
 <ion-icon :icon="closeOutline" color="primary" @click="clear()"></ion-icon>
 
 </ion-chip>
@@ -111,11 +112,13 @@ Sending Money to {{ dependent.relationship }}
 
 
 
-<loader-popup-component :message="'Loading...'" v-if="isFormloading==true"/>
+<loader-popup-component :message="'Sending...'" v-if="isFormloading==true"/>
 
 </layout-component>
 </template>
 <script>
+
+
 import LayoutComponent from '@/components/LayoutComponent.vue';
 import { IonButton,IonToolbar, IonItem,IonLabel, IonAvatar, IonInput, IonFooter,
 IonChip,
@@ -123,14 +126,16 @@ IonIcon,
 IonFab,
 IonFabButton,
 
+
 } from '@ionic/vue';
 import { Preferences } from '@capacitor/preferences';
 import Dependent from '../models/dependents.js';
 import SkeletonComponent from '@/components/SkeletonComponent.vue';
-import {send,closeOutline, search, sendSharp, closeSharp, addSharp,ellipse } from 'ionicons/icons';
+import {send,closeOutline, search, sendSharp, closeSharp, addSharp,ellipse, } from 'ionicons/icons';
 import SendMoney from '@/models/send.js';
 import LoaderPopupComponent from '@/components/LoaderPopupComponent.vue';
-
+import { Dialog } from '@capacitor/dialog';
+import Notification from '@/models/notifications.js';
 
 
 
@@ -145,7 +150,6 @@ IonChip,
 IonFab,
 IonFabButton,
 LoaderPopupComponent,
-
 
 },
 data(){return{
@@ -259,19 +263,44 @@ this.form.balance=el.amount;
 });
 
 this.message='Success';
+
 //reset form fields.
+const message='Yo have sent '+ this.form.amount+'/= to '+this.form.telephone+'.';
+Dialog.alert({
+title:'Successful',
+message:message,
+});
+
+
+const not=new Notification;
+not.create({
+'userID':this.form.userID,
+'title':'Money sent',
+'description':message
+});
+
+
 this.form.dependentID='';
 this.form.amount='';
 this.form.telephone='';
 this.isFormloading=false;
 this.clear();
+
+//
+
+
 }else{
 console.log('internet connection error.');
 }
 }).catch(e2=>{console.log(e2)});
+
 }else{
 this.message='You have low credit on your account.';
+Dialog.alert({title:'Failed',message:'You have low credit on your account.'});
+this.isFormloading=false;
 }
+//send out notifications
+
 
 }else{
 console.log('internet connection error.');
@@ -284,7 +313,16 @@ this.message='Fill in all fields';
 this.isFilled=true;
 }
 
+},
+
+alert_message(title,message){
+  Dialog.alert({
+    title:title,
+    message:message,
+  });
+
 }
+
 
 
 
@@ -353,5 +391,6 @@ ion-item{
 border:none;
 }
 
+h4{color:#5D6D7E;}
 
 </style>

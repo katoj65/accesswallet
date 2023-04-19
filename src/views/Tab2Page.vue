@@ -2,8 +2,8 @@
 <layout-component :title="title">
 <div v-if="isLoading==false">
 <div>
-<div v-if="response.length>0">
-<ion-item button v-for="m in response" :key="m.id" detail="true" lines="full" style="border-bottom:none;">
+<div v-if="response.length>0"  style="padding:10px;">
+<ion-item button v-for="m in response" :key="m.id" detail="true" lines="full" style="border-bottom:none;margin-bottom:5px;border-radius:10px; border:none;">
 <ion-icon :icon="images" slot="start"></ion-icon>
 <ion-label>
 <h4 style="color:#5D6D7E;font-size:18px;text-transform:capitalize;">{{ m.name }}</h4>
@@ -37,7 +37,7 @@ SkeletonComponent
 },
 
 data(){return{
-title:'Buy Items',
+title:'Payment',
 isLoading:false,
 response:[],
 
@@ -61,9 +61,13 @@ this.isLoading=true;
 const  supabase =  createClient(this.$store.state.supabase.endpoint, this.$store.state.supabase.key);
 await supabase.from('payment_item')
 .select('*').then(res=>{
+if(res.status==200){
 this.isLoading=false;
 // console.log(res.data);
 this.response=res.data;
+}else{
+console.log('Internet conenction');
+}
 }).catch(error=>{
 console.log(error);
 });
