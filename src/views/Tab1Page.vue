@@ -28,10 +28,10 @@
 
 <ion-item v-for="m in menu" :key="m.id" style="border-radius:10px 10px 10px 10px;margin-bottom:10px;" lines="none" detail="true" button>
 <ion-avatar slot="start">
-  <img alt="Silhouette of a person's head"  :src="m.icon"/>
+  <img   :src="m.icon" style="height:30px;width:30px;"/>
 </ion-avatar>
 <ion-label>
-  <h4 style="font-size:20px;color:#528265;font-weight: bold;">{{ m.item }}</h4>
+  <h4 style="font-size:17px;font-weight: bold;">{{ m.item }}</h4>
 </ion-label>
 </ion-item>
 

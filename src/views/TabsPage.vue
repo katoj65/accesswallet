@@ -20,8 +20,8 @@
         </ion-tab-button>
 
         <ion-tab-button tab="tab3" href="/tabs/tab3">
-          <ion-icon :icon="wallet" style="color:#53986E" />
-          <ion-label>Wallet</ion-label>
+          <ion-icon :icon="people" style="color:#53986E" />
+          <ion-label>Contacts</ion-label>
         </ion-tab-button>
       </ion-tab-bar>
     </ion-tabs>
@@ -30,7 +30,7 @@
 
 <script>
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet } from '@ionic/vue';
-import { ellipse, square, triangle,cash,bagHandleSharp,wallet,card } from 'ionicons/icons';
+import { ellipse, square, triangle,cash,bagHandleSharp,wallet,card ,people} from 'ionicons/icons';
 export default{
 components:{
 IonTabBar,
@@ -45,7 +45,10 @@ square,
 triangle,
 cash,
 bagHandleSharp,
-wallet,card
+wallet,
+card,
+people
+
 
 
 

@@ -11,7 +11,7 @@
 
 
 
-
+{{ item }}
 
 <div v-if="isLoading==false" style="margin-top:2px;">
 <div v-if="response.length>0">
@@ -141,10 +141,16 @@ import Notification from '@/models/notifications.js';
 
 export default {
 components:{
+
 LayoutComponent,
-IonButton, IonToolbar,
-IonItem,IonLabel,IonAvatar,IonInput,
-SkeletonComponent,IonFooter,
+IonButton,
+IonToolbar,
+IonItem,
+IonLabel,
+IonAvatar,
+IonInput,
+SkeletonComponent,
+IonFooter,
 IonIcon,
 IonChip,
 IonFab,
@@ -165,6 +171,10 @@ message:null,
 isFormloading:false,
 isFilled:false,
 isSuccess:false,
+
+//
+
+//
 
 //form
 form:{
@@ -315,17 +325,19 @@ this.isFilled=true;
 
 },
 
+//
 alert_message(title,message){
-  Dialog.alert({
-    title:title,
-    message:message,
-  });
+Dialog.alert({
+title:title,
+message:message,
+});
 
+},
+
+//
+get_stored_item(){
+this.dependent=this.$store.state.search_dependent;
 }
-
-
-
-
 
 
 
@@ -336,6 +348,8 @@ alert_message(title,message){
 
 mounted(){
 this.payload();
+this.get_stored_item();
+
 },
 
 setup(){

@@ -19,6 +19,8 @@ import SendToDependentPage from '../views/SendToDependentPage.vue';
 import DependentWalletPage from '../views/DependentWalletPage.vue';
 import DependentSchedulePage from '../views/DependentSchedulePage.vue';
 import SearchPage from '../views/SearchPage.vue';
+import ContactSendPage from '../views/ContactSendPage.vue';
+import SendGiftPage from '../views/SendGiftPage.vue';
 
 
 
@@ -117,8 +119,8 @@ component:CreateDependentPage
 },
 
 {
-path:'/dependent-send/:id',
-component:SendToDependentPage
+path:'/contact-send/:id',
+component:ContactSendPage
 },
 {
 path:'/dependent-wallet/:id',
@@ -127,11 +129,20 @@ component:DependentWalletPage
 
 {
 path:'/dependent-schedule/:id',
-component:DependentSchedulePage
+component:DependentSchedulePage,
+name:'dependent schedule'
 },
+
 {
 path:'/search',
 component:SearchPage,
+name:'search dependent'
+},
+{
+path:'/send/:id/:any',
+component:SendGiftPage,
+name:'send gift'
+
 }
 
 ]

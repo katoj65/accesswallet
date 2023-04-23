@@ -1,16 +1,11 @@
 <template>
 <div>
-<ion-card style="margin:0;padding-top:10px;">
-<ion-card-header>
-<ion-card-title style="font-size:18px;">
-
-{{forex_update_type=='offer'?'Offer Exchange Rate':'Forex Exchange Rate'}}
-
+<ion-card style="margin:0;padding-top:0px;">
+<ion-card-header style="margin:0;padding:0;padding-left:15px;">
+<ion-card-title style="font-size:15px; font-weight:bold;">
+{{forex_update_type=='offer'?'Offer exchange rate':'Forex exchange rate'}}
 
 <span style="float:right;">
-<ion-button style="margin-top:-20px;padding:0;" shape="round" size="small" class="btn2" @click="$router.push('/culiculator')">
-<ion-icon :icon="calculator" style="margin-right:3px;"></ion-icon>
-</ion-button>
 </span>
 </ion-card-title>
 </ion-card-header>

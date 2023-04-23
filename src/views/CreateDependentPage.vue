@@ -52,7 +52,7 @@ AlertComponent,
 },
 data(){return{
 title:'Dependents',
-back:'/dependents',
+back:'/tabs/tab3',
 isLoading:false,
 isSuccess:false,
 message:null,

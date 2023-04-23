@@ -52,6 +52,16 @@ return await supabase.from('dependent').select('*').eq('userID',id);
 }
 
 
+async search(find,uid){
+const supabase=connect();
+return await supabase.from('dependent')
+.select()
+.ilike('names', '%'+find+'%')
+.eq('userID',uid)
+
+}
+
+
 
 
 

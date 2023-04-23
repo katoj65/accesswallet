@@ -38,8 +38,9 @@
 </div>
 </div>
 
-<div style="margin-top:3px;">
-<ion-item  lines="none" >
+<div style="margin:8px;">
+
+<ion-item  lines="none" style="margin-bottom:4px;">
 <ion-icon :icon="peopleOutline" slot="start"></ion-icon>
 <ion-label style="text-transform:capitalize;">
 {{ d.relationship }} </ion-label>
@@ -47,7 +48,7 @@
 
 
 
-<ion-item lines="none">
+<ion-item lines="none" style="margin-bottom:4px;">
 <ion-icon :icon="locationOutline" slot="start"></ion-icon>
 <ion-label style="text-transform:capitalize;">
 {{ d.address }}
@@ -56,28 +57,28 @@
 
 
 
-<ion-item lines="none" detail="true" button>
+<ion-item lines="none" detail="true" button style="margin-bottom:4px;">
 <ion-icon :icon="cashOutline" slot="start"></ion-icon>
 <ion-label>Shopping Vochour</ion-label>
 </ion-item>
 
-<ion-item lines="none" detail="true" button>
+<ion-item lines="none" detail="true" button style="margin-bottom:4px;">
 <ion-icon :icon="giftOutline" slot="start"></ion-icon>
 <ion-label>Send Gift</ion-label>
 </ion-item>
 
 
-<ion-item lines="none" detail="true" button>
+<ion-item lines="none" detail="true" button style="margin-bottom:4px;">
 <ion-icon :icon="mailOutline" slot="start"></ion-icon>
 <ion-label>Buy Items</ion-label>
 </ion-item>
 
-<ion-item lines="none" detail="true" button>
+<ion-item lines="none" detail="true" button style="margin-bottom:4px;">
 <ion-icon :icon="mailOutline" slot="start"></ion-icon>
 <ion-label>Invitations</ion-label>
 </ion-item>
 
-<ion-item lines="none" detail="true" button>
+<ion-item lines="none" detail="true" button style="margin-bottom:4px;">
 <ion-icon :icon="mailOutline" slot="start"></ion-icon>
 <ion-label>View Transactions</ion-label>
 </ion-item>
@@ -254,8 +255,8 @@ border:none;
 
 
 ion-item {
---border-radius: 0px;
---margin-bottom:2px;
+--border-radius: 10px;
+--margin-bottom:10px;
 
 
 }
