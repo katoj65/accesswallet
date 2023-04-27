@@ -91,6 +91,6 @@ images,
 </script>
 <style scoped>
 ion-item::part(native) {
-border-bottom: solid thin #EBEDEF;
+border-bottom:solid 1px #F2F3F4;
 }
 </style>

@@ -111,9 +111,7 @@ color:white;
 }
 
 ion-item{
-font-size:18px;
-margin-bottom: 2px;
---border:none;
+--font-size:18px;
 }
 
 ion-footer{
@@ -124,12 +122,16 @@ box-shadow:none;
 ion-button::part(native){
 --padding:15px;
 height: 35px;
+border:none;
 }
 
 
 ion-item::part(native) {
-border:none;
-  }
-
+  border-bottom:solid 1px #F2F3F4;
+}
+ion-list::part(native){
+margin:0;
+padding:0;
+}
 
 </style>

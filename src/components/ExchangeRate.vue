@@ -2,7 +2,7 @@
 <div>
 <ion-card style="margin:0;padding-top:0px;">
 <ion-card-header style="margin:0;padding:0;padding-left:15px;">
-<ion-card-title style="font-size:15px; font-weight:bold;">
+<ion-card-title style="font-size:17px; font-weight:bold;">
 {{forex_update_type=='offer'?'Offer exchange rate':'Forex exchange rate'}}
 
 <span style="float:right;">
@@ -37,7 +37,7 @@
 <ion-row>
 <ion-col size="12" style="padding:0;padding-bottom:15px;">
 <div>
-<ion-button expand="block" class="btn1" @click="$router.push('/send-money')">
+<ion-button expand="block" class="btn1" @click="$router.push('/tabs/tab3')">
 <!-- <ion-icon :icon="wallet" style="margin-right:10px;"></ion-icon> -->
 Send Money
 </ion-button>

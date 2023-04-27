@@ -186,6 +186,6 @@ import { images, send } from 'ionicons/icons';
 
     ion-item{
     font-size:18px;
-    margin-bottom: 2px;
+
     }
     </style>

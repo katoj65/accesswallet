@@ -21,6 +21,7 @@ import DependentSchedulePage from '../views/DependentSchedulePage.vue';
 import SearchPage from '../views/SearchPage.vue';
 import ContactSendPage from '../views/ContactSendPage.vue';
 import SendGiftPage from '../views/SendGiftPage.vue';
+import TestPage from '../views/TestPage.vue';
 
 
 
@@ -107,7 +108,8 @@ component:ExchangeRatePage
 },
 {
 path:'/edit-profile',
-component:EditProfilePage
+component:EditProfilePage,
+name:'edit profile'
 },
 {
 path:'/dependent/:id',
@@ -115,16 +117,19 @@ component:ShowDependentPage
 },
 {
 path:'/dependent/create',
-component:CreateDependentPage
+component:CreateDependentPage,
+name:'create_dependent'
 },
 
 {
 path:'/contact-send/:id',
-component:ContactSendPage
+component:ContactSendPage,
+name:'contact person'
 },
 {
 path:'/dependent-wallet/:id',
-component:DependentWalletPage
+component:DependentWalletPage,
+name:'depenent wallet'
 },
 
 {
@@ -142,7 +147,11 @@ name:'search dependent'
 path:'/send/:id/:any',
 component:SendGiftPage,
 name:'send gift'
-
+},
+{
+path:'/test',
+component:TestPage,
+name:'test'
 }
 
 ]

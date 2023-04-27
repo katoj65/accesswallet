@@ -13,7 +13,7 @@
 
 {{ item }}
 
-<div v-if="isLoading==false" style="margin-top:2px;">
+<div v-if="isLoading==false">
 <div v-if="response.length>0">
 <ion-item  lines="full" v-for="d in response" :key="d.id">
 <ion-avatar slot="start">

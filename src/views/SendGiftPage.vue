@@ -15,6 +15,9 @@ Gift Store
 
 
 
+<ion-button @click="$router.push('/test')">Test</ion-button>
+
+
 
 
 </div>
@@ -86,7 +89,7 @@ import { images, send } from 'ionicons/icons';
   {id:5,name:'Schedule Payment',icon:'',url:'/send-gift'},
   {id:5,name:'Send Budget',icon:'',url:'/send-gift'},
   {id:2,name:'Send Invitation',icon:'',url:'/send-gift'},
-  {id:1,name:'Wallet Deposit',icon:'',url:'/send-gift'},
+  {id:1,name:'Wallet Deposit',icon:'',url:'/test'},
 
 
 
